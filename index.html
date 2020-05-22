@@ -1,46 +1,90 @@
-<html>
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="js/app.js"></script>
-    <link rel = 'stylesheet' type='text/css' href="css/style.css">
-    <title>gnavi検索</title>
-  </head>
-  <body>
-    <form name='mainform' method = 'GET'>
-      距離
-      <select id = range>
-        <option value='1'>300m</option>
-        <option value='2'>500m</option>
-        <option value='3'>1000m</option>
-        <option value='4'>2000m</option>
-        <option value='4'>3000m</option>
-      </select><br>
-      店の名前
-      <input type = 'text', id = 'freeword'>
-      <input type = 'button', value = '検索' onclick="gnaviFreewordSearch(offset=1, hit_per_page=20);">
-    </form>
-  <div id = 'shops'>
-    <div id = 'shopinfo0'></div>
-    <div id = 'shopinfo1'></div>
-    <div id = 'shopinfo2'></div>
-    <div id = 'shopinfo3'></div>
-    <div id = 'shopinfo4'></div>
-    <div id = 'shopinfo5'></div>
-    <div id = 'shopinfo6'></div>
-    <div id = 'shopinfo7'></div>
-    <div id = 'shopinfo8'></div>
-    <div id = 'shopinfo9'></div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/b3157441e0.js" crossorigin="anonymous"></script>
+  <script src="js/app.js"></script>
+  <link rel = 'stylesheet' type='text/css' href="css/style.css">
+  <title>gnavi検索</title>
+</head>
+
+
+<body class="d-flex flex-column" style="min-height: 100vh">
+
+
+  <!-- {{-- header section --}} -->
+  <nav class="nav nav-dark bg-warning sticky-top mb-5 justify-content-center">
+    <h3>ローカルレストラン</h3>
+  </nav>
+
+
+  <!-- {{-- main section --}} -->
+  <div class="container">
+    <div class="row">
+      <form name='mainform' method = 'GET' class="col-12">
+      <div class="cp_ipselect cp_sl04 col-6">
+        <select id = range>
+          <option value='1'>300m</option>
+          <option value='2'>500m</option>
+          <option value='3'>1000m</option>
+          <option value='4'>2000m</option>
+          <option value='4'>3000m</option>
+        </select><br>
+      </div>
+      <div class="input-group text-center col-6">
+        <input type="text" id = 'freeword' class="form-control" placeholder="フリーワード検索">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default"onclick="gnaviFreewordSearch(offset=1, hit_per_page=20);">ボタン</button>
+        </span>
+      </div>
+    </div>
+    
+    <!-- <input type = 'text', id = 'freeword'> -->
+    <!-- <input type = 'button', value = '検索' onclick="gnaviFreewordSearch(offset=1, hit_per_page=20);"> -->
+  </form>
+
+    <div class="row justify-content-center"id = 'shops'>
+      <div class="col-7 mx-5" id = 'shopinfo0'>
+      </div>
+      <div class="col-7" id = 'shopinfo01'>
+      </div>
+      <div class="col-7" id = 'shopinfo2'>
+      </div>
+      <div class="col-7" id = 'shopinfo3'>
+      </div>
+      <div class="col-7" id = 'shopinfo4'>
+      </div>
+      <div class="col-7" id = 'shopinfo5'>
+      </div>
+      <div class="col-7" id = 'shopinfo6'>
+      </div>
+      <div class="col-7" id = 'shopinfo7'>
+      </div>
+      <div class="col-7" id = 'shopinfo8'>
+      </div>
+      <div class="col-7" id = 'shopinfo9'>
+      </div>
+    </div>
   </div>
-  <a href = "#" onclick="gnaviFreewordSearch(offset+=hit_per_page, hit_per_page);">次の結果</a>
-  <footer>
-    Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a>
+  <div class="container my-5">
+    <div class="row justify-content-center"id = 'shops'>
+      <div id="next">
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- {{-- footer section --}} -->
+  <footer class="footer text-center bg-warning fixed-bottom mt-5">
+    <p>Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank">ぐるなびWebService</a></p>
   </footer>
-  </body>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </html>
