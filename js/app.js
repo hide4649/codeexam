@@ -23,7 +23,7 @@ function gnaviFreewordSearch(offset, hit_per_page){
       document.getElementById("shops").childNodes[i].innerHTML 
       = `<div class="card text-white bg-dark mb-5">
             <div class="row justify-content-center">
-              <div class="col-md-4">
+              <div class="col-md-4 pr-0">
                 <img class="card-img" src="${req.response.rest[i].image_url.shop_image1}" alt="no image">
               </div>
               <div class="col-md-8">

@@ -16,36 +16,62 @@
 
 
   <!-- {{-- header section --}} -->
-  <nav class="nav nav-dark bg-warning sticky-top mb-5 justify-content-center">
+  <nav class="nav nav-dark bg-warning sticky-top  justify-content-center">
     <h3>ローカルレストラン</h3>
   </nav>
 
-
   <!-- {{-- main section --}} -->
-  <div class="container">
-    <div class="row">
-      <form name='mainform' method = 'GET' class="col-12">
-      <div class="cp_ipselect cp_sl04 col-6">
-        <select id = range>
-          <option value='1'>300m</option>
-          <option value='2'>500m</option>
-          <option value='3'>1000m</option>
-          <option value='4'>2000m</option>
-          <option value='4'>3000m</option>
-        </select><br>
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <!-- スライドさせる画像の設定 -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="row">
+          <img class="d-block  carousel-image" src="image/和風.jpg" alt="和風">
+        </div>
       </div>
-      <div class="input-group text-center col-6">
-        <input type="text" id = 'freeword' class="form-control" placeholder="フリーワード検索">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-default"onclick="gnaviFreewordSearch(offset=1, hit_per_page=20);">ボタン</button>
-        </span>
+      <div class="carousel-item">
+        <img class="d-block  carousel-image" src="image/イタリアン.jpg" alt="イタリアン">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block  carousel-image" src="image/中華料理.jpg" alt="中華料理">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block  carousel-image" src="image/寿司.jpg" alt="寿司">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block  carousel-image" src="image/親子丼.jpg.webp" alt="丼物">
       </div>
     </div>
-    
-    <!-- <input type = 'text', id = 'freeword'> -->
-    <!-- <input type = 'button', value = '検索' onclick="gnaviFreewordSearch(offset=1, hit_per_page=20);"> -->
-  </form>
+  </div>
+  
+  
+  
+  <!-- {{-- main section --}} -->
+<div class="search">
+  <div class="container">
+    <form name='mainform' method = 'GET' class="col-12">
+      <div class="row">
+        <div class="cp_ipselect cp_sl04 col text-right">
+          <select id = range>
+            <option value='1'>300m</option>
+            <option value='2'>500m</option>
+            <option value='3'>1000m</option>
+            <option value='4'>2000m</option>
+            <option value='4'>3000m</option>
+          </select>
+        </div>
+        <div class="input-group text-center col">
+          <input type="text" id = 'freeword' class="form-control" placeholder="フリーワード検索">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-primary"onclick="gnaviFreewordSearch(offset=1, hit_per_page=20);"><i class="fas fa-search-plus"></i></button>
+          </span>
+        </div>
+      </div>
+    </form>
+   </div>
+</div>
 
+   <div class="container">
     <div class="row justify-content-center"id = 'shops'>
       <div class="col-7 mx-5" id = 'shopinfo0'>
       </div>
@@ -69,6 +95,7 @@
       </div>
     </div>
   </div>
+
   <div class="container my-5">
     <div class="row justify-content-center"id = 'shops'>
       <div id="next">

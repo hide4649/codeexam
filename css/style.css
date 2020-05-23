@@ -8,6 +8,16 @@ body{
   background: linear-gradient(to right, #ffffff, #abbaab); 
 }
 
+.carousel-image{
+	width: 100% !important;
+	height: 350px !important;
+}
+
+.search{
+	background-color: #d3d4d3;
+	margin-bottom: 10px;
+}
+
 img{
   width: 100%;
   height: 100%;
@@ -25,13 +35,17 @@ a{
 
 .input-group{
   width: 30% !important;
-  margin: 0 auto;
+  margin-top: 2px;
+}
+
+.card-body{
+	padding-left: 0 !important;
 }
 
 .cp_ipselect {
 	overflow: hidden;
-	width: 20%;
-	margin: 2em auto;
+	width: 20% ;
+	/* margin: 2em auto; */
 	text-align: center;
 }
 
