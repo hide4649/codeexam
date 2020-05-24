@@ -1,21 +1,41 @@
 body{
-  height: 100%;
-  width: 100%;
-  color: #222;
+  max-height: 1000px;
+	width: 100%;
+  color: black;
   font-family: 'Yu Gothic UI',sans-serif;
   background: #abbaab; 
   background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  
   background: linear-gradient(to right, #ffffff, #abbaab); 
+	background-image: url(C:/Users/tokuc/OneDrive/Desktop/programing/gnaviapi/image/レストラン風景.jpg);
+	background-attachment: fixed;
+	background-size: cover;
 }
+.gurunav{
+	width: 70px;
+	height: 20px;
+}
+
+.modal-body p {
+  margin: 3px 5px 0 0; 
+}
+
+header{
+	color: black;
+	font-weight: bold;
+	font-family: 'Corben', cursive;
+	width: 100%;
+	height: 70px;
+}
+
 
 .carousel-image{
 	width: 100% !important;
-	height: 350px !important;
+	height: 390px !important;
 }
 
 .search{
 	background-color: #d3d4d3;
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 
 img{
@@ -23,14 +43,18 @@ img{
   height: 100%;
 }
 
-.modal-content{
-  background: #abbaab; 
-  background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  
-  background: linear-gradient(to right, #ffffff, #abbaab)
-}
+
 
 a{
-  cursor: pointer;
+	cursor: pointer;
+	text-decoration: none;
+	color: black;
+}
+
+a:hover{
+	color: black;
+	text-decoration: underline;
+
 }
 
 .input-group{
@@ -103,3 +127,17 @@ a{
 .footer>p{
   margin:0;
 }
+
+@media (max-width: 767.98px) { 
+	.card-body h5 p{
+		font-size: 13px;
+	}
+}
+@media (max-width: 1000px) { 
+	.card-body > h5 ,p{
+		font-size: 13px;
+	}
+	.card-body > p{
+		font-size: 10px;
+	}
+	}

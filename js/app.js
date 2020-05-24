@@ -23,10 +23,10 @@ function gnaviFreewordSearch(offset, hit_per_page){
       document.getElementById("shops").childNodes[i].innerHTML 
       = `<div class="card text-white bg-dark mb-5">
             <div class="row justify-content-center">
-              <div class="col-md-4 pr-0">
+              <div class="col-sm-5 pr-0">
                 <img class="card-img" src="${req.response.rest[i].image_url.shop_image1}" alt="no image">
               </div>
-              <div class="col-md-8">
+              <div class="col-sm-7">
                 <div class="card-body">
                   <h5 class="card-title">${req.response.rest[i].name}<br>${req.response.rest[i].access.line} ${req.response.rest[i].access.station}</h5>
                   <p class="card-text">${req.response.rest[i].pr.pr_short }</p>
@@ -38,9 +38,9 @@ function gnaviFreewordSearch(offset, hit_per_page){
             </div>
           </div>
 
-          <div class="modal fade" id="exampleModal_${[i]}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
+          <div class="modal fade " id="exampleModal_${[i]}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog " role="document">
+              <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">${req.response.rest[i].name}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -48,13 +48,21 @@ function gnaviFreewordSearch(offset, hit_per_page){
                   </button>
                 </div>
                 <div class="modal-body">
-                <img src = ${req.response.rest[i].image_url.shop_image1}>
-                <br>
+                <img class="mb-2" src = ${req.response.rest[i].image_url.shop_image1}>
+                <p><店舗紹介></p>
+                <p>${req.response.rest[i].pr.pr_long }</p>
+                <p><住所></p>
                 <p>${req.response.rest[i].address}</p>
-                <br>
+                <p><アクセス></p>
+                <p>${req.response.rest[i].access.line} ${req.response.rest[i].access.station} ${req.response.rest[i].access.walk}分</p>
+                <p><電話番号></p>
                 <p>${req.response.rest[i].tel}</p>
-                <br>
-                <p>${req.response.rest[i].opentime}</p>
+                <p><営業時間></p>
+                <p>${req.response.rest[i].opentime} 　⚠休業日 ${req.response.rest[i].holiday}</p>
+                <p><予算></p>
+                <p>平均予算:${req.response.rest[i].budget}  ランチ平均予算:${req.response.rest[i].lunch}</p>
+                <p><カード・電子マネー></p>
+                <p>カード:${req.response.rest[i].credit_card}  電子マネー:${req.response.rest[i].e_money}</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
