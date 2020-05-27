@@ -1,0 +1,66 @@
+.profile>p{
+  margin:30px 0;
+  font-size: 25px;
+}
+
+.profileimg{
+  width: 300px;
+  height:250px;
+  border-radius: 50%;
+}
+
+.post{
+  margin-bottom: 20px;
+}
+
+.postimg{
+  width:100%;
+  height:180px;
+}
+
+.null{
+  margin:230px 0;
+}
+
+
+@media (min-width: 1200px) { 
+  .postindex{
+    margin:0px 50px;
+  }
+}
+
+
+@media (min-width: 992px) { 
+  .postindex{
+    margin:0px 20px;
+  }
+}
+
+
+@media (min-width: 765px) { 
+  .postindex{
+    margin:0px 0px;
+  }
+  
+}
+
+@media (max-width: 992px) { 
+  .profileimg{
+    width: 300px;
+    height:250px;
+  }
+  
+}
+
+@media (max-width: 400px) { 
+  .profileimg{
+    width: 200px;
+    height:200px;
+  }
+
+  .postimg{
+    height:130px;
+  }
+  
+}
+
