@@ -24,29 +24,28 @@ class PostsController extends Controller
     }
 
 
-    public function store(PostRequest $request){
+    public function store(Request $request){
           
-        if($request->file('image')) {
-            $post = new Post;
-            $post->user_id = $request->user_id;
-            $post->category_id = $request->category_id;
-            $post->body = $request->body;
-            $post->title = $request->title;
-            
-            $image = $request->file('image');
-            $filename = $image->store('public/image');
-            $post->image = basename($filename);
-
-            $post->save();
-
-        }elseif($request->file('image') === null){
-            $post = new Post;
-            $post->user_id = $request->user_id;
-            $post->category_id = $request->category_id;
-            $post->body = $request->body;
-            $post->title = $request->title;
-            $post->save();
-        }
+        $post = new Post;
+        $post->user_id = $request->user_id;
+        $post->restaurant_name = $request->restaurant_name;
+        $post->restaurant_intro_short = $request->restaurant_intro_short;
+        $post->restaurant_intro_long = $request->restaurant_intro_long;
+        $post->restaurant_image = $request->restaurant_image;
+        $post->restaurant_address = $request->restaurant_address;
+        $post->access_line = $request->access_line;
+        $post->access_station = $request->access_station;
+        $post->restaurant_access_walk = $request->restaurant_access_walk;
+        $post->restaurant_tell = $request->restaurant_tell;
+        $post->restaurant_opentime = $request->restaurant_opentime;
+        $post->restaurant_holiday = $request->restaurant_holiday;
+        $post->restaurant_budget = $request->restaurant_budget;
+        $post->restaurant_budget_lunch = $request->restaurant_budget_lunch;
+        $post->restaurant_credit_card = $request->restaurant_credit_card;
+        $post->restaurant_e_money = $request->restaurant_e_money;
+        $post->restaurant_url = $request->restaurant_url;
+        
+        $post->save();
 
 
         return redirect('/');

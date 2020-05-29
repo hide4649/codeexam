@@ -38,6 +38,8 @@ class CreatePostsTable extends Migration
             
             $table->text('restaurant_budget')->nullable();
             
+            $table->text('restaurant_budget_lunch')->nullable();
+            
             $table->text('restaurant_credit_card')->nullable();
             
             $table->text('restaurant_e_money')->nullable();
