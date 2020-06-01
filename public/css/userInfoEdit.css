@@ -1,0 +1,79 @@
+.container{
+  padding-left:250px;
+  padding-right:250px;
+}
+
+
+label{
+  font-weight: 900;
+  background-color:white;
+  border-radius: 10%;
+}
+
+.userInfoEdit{
+  font-size: 30px;
+}
+
+@media (max-width: 1200px){ 
+  .container{
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .userInfoEdit{
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 992px){ 
+  .container{
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media (max-width: 765px){ 
+  .container{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 400px){
+  .userInfoEdit{
+    font-size: 15px;
+  }
+
+}
+/* @media (max-width: 1200px){
+  
+  .profileEdit{
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 992px){
+  .profile{
+  padding-left:125px;
+  padding-right:125px;
+  }
+}
+
+
+@media (max-width: 767px){
+  .profileEdit{
+    font-size: 20px;
+  }
+  .profile{
+  padding-left:30px;
+  padding-right:30px;
+  }
+
+}
+
+@media (max-width: 400px){
+  .profileEdit{
+    font-size: 20px;
+  }
+
+} */

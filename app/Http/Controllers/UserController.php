@@ -6,52 +6,27 @@ use Illuminate\Http\Request;
 
 use App\Post;
 use App\User;
-use Carbon\Carbon;
 
 class UserController extends Controller
 {
 
     public function mypage(User $user){
-        $user->load('posts');
-        return view('users.mypage')->with('user',$user);
+        $posts = Post::simplePaginate(10);
+        return view('users.mypage',compact('posts','user'));
     }
 
     
-    public function editprofile(User $user){
-        return view('users.editprofile')->with('user', $user);
+    public function userInfoEdit(User $user){
+        return view('users.userInfoEdit')->with('user', $user);
     }
     
 
-    public function profileUpdate(Request $request, User $user) {
-        $exist = User::where('image', $user->image)->exists();
-        if($exist){
-            \File::delete('public/proflieimage/'. $user->image);
-            if($request->file('image')) { 
-                $user->name = $request->name;
-                $image = $request->file('image');
-               
-                $filename = $image->store('public/proflieimage');
-    
-                $user->image = basename($filename);
-                $user->save();
-            }else{
-                $user->name = $request->name;
-                $user->save();
-            }
-        }else{
-            if($request->file('image')) { 
-                $user->name = $request->name;
-                $image = $request->file('image');
-               
-                $filename = $image->store('public/proflieimage');
-    
-                $user->image = basename($filename);
-                $user->save();
-            }
-        }
+    public function userInfoUpdate(Request $request, User $user) {
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
 
-        return view('users.mypage')->with('user',$user);
-        
+        return redirect('/');
     }
     
 }  

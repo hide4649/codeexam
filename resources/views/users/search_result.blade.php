@@ -1,13 +1,9 @@
 @extends('layouts.app')
 
-@section('title','マイページ' )
+@section('title','検索結果' )
 
 @section('css')
-<link rel = 'stylesheet' type='text/css' href="{{ asset('/css/mypage.css') }}">
-@endsection
-
-@section('js')
-<script src="{{ asset('/js/deleteConfirm.js') }}"></script>
+<link rel = 'stylesheet' type='text/css' href="{{ asset('/css/search_result.css') }}">
 @endsection
 
 
@@ -27,11 +23,7 @@
   
     <div class="row justify-content-center">
       <div class="col-5 bg-light py-2 mt-4 text-center">
-         @if (isset($search_result))
-          <h4>{{ $search_result }}</h4>
-         @else
-          <h4>{{ $user->name }} さんのお気に入り一覧</h4>    
-         @endif 
+        <h4>{{ $search_result }}</h4>
       </div>
     </div>
   
@@ -57,13 +49,6 @@
                             <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal_{{ $post->id }}">
                               店舗情報はこちら
                             </button>
-                            <button type="button" class="btn btn-primary mt-2">
-                              <a class="del" data-id ="{{ $post->id }}">削除する</a>
-                            </button>
-                            <form method="post" action="{{ route('delete', [$post->id , Auth::id()]) }}" id="form_{{ $post->id }}">
-                              {{ csrf_field() }}
-                              {{ method_field('delete') }}
-                            </form>
                           </div>
                         </div>
                       </div>
@@ -114,11 +99,7 @@
               <div class="container mt-5">
                 <div class="row">
                   <div class="col-xl-12 text-center">
-                    @if (isset($search_result))
                     <h1 class="bg-light">該当するものはございません</h1>
-                    @else   
-                    <h1 class="bg-light">まだお気に入りはありません</h1>
-                    @endif 
                   </div>
                 </div>
               </div>

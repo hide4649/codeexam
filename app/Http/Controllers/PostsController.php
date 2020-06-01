@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use App\Http\Requests\PostRequest;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostsController extends Controller
@@ -14,67 +15,51 @@ class PostsController extends Controller
         return view('posts.index');
     }
 
-    public function show(Post $post){
-        
-        // $orderbys = Post::where('user_id', $post->user_id)->latest()->limit(3)->get();
-        // $randoms = Post::where('user_id', $post->user_id)->inRandomOrder()->take(3)->get();
-        // $comments = Comment::where('post_id',$post->id)->get();
-        // return view('posts.show',compact('orderbys','randoms','comments'))->with('post',$post);
-    
-    }
-
 
     public function store(Request $request){
-          
+        $restaurant_name = $request->input('restaurant_name');
+        $db = Post::select('restaurant_name')->where('restaurant_name',$restaurant_name)->get();
+      if(is_null($db)){
         $post = new Post;
-        $post->user_id = $request->user_id;
-        $post->restaurant_name = $request->restaurant_name;
-        $post->restaurant_intro_short = $request->restaurant_intro_short;
-        $post->restaurant_intro_long = $request->restaurant_intro_long;
-        $post->restaurant_image = $request->restaurant_image;
-        $post->restaurant_address = $request->restaurant_address;
-        $post->access_line = $request->access_line;
-        $post->access_station = $request->access_station;
-        $post->restaurant_access_walk = $request->restaurant_access_walk;
-        $post->restaurant_tell = $request->restaurant_tell;
-        $post->restaurant_opentime = $request->restaurant_opentime;
-        $post->restaurant_holiday = $request->restaurant_holiday;
-        $post->restaurant_budget = $request->restaurant_budget;
-        $post->restaurant_budget_lunch = $request->restaurant_budget_lunch;
-        $post->restaurant_credit_card = $request->restaurant_credit_card;
-        $post->restaurant_e_money = $request->restaurant_e_money;
+        $post->user_id = Auth::id();
+        $post->restaurant_name = $request->restaurant_name; 
+        $post->restaurant_intro_short = $request->restaurant_intro_short; 
+        $post->restaurant_intro_long = $request->restaurant_intro_long; 
+        $post->restaurant_image = $request->restaurant_image; 
+        $post->restaurant_address = $request->restaurant_address; 
+        $post->restaurant_access_line_station = $request->restaurant_access_line_station; 
+        $post->restaurant_access_line_station_walk = $request->restaurant_access_line_station_walk;  
+        $post->restaurant_tell = $request->restaurant_tell; 
+        $post->restaurant_opentime_holiday = $request->restaurant_opentime_holiday; 
+        $post->restaurant_budget = $request->restaurant_budget;  
+        $post->restaurant_credit_card = $request->restaurant_credit_card; 
+        $post->restaurant_e_money = $request->restaurant_e_money; 
         $post->restaurant_url = $request->restaurant_url;
         
         $post->save();
+        return response()->json(['message' => '保存完了しました']);
+      }else{
+        return response()->json(['message' => 'もうすでに保存しています']);
+      }
 
 
-        return redirect('/');
     }
 
 
     public function destroy(Post $post) {
-        
-        $deleteimg = $post->image;
-  
-        if($deleteimg === null){
-          $post->delete();  
-         }
-         else{
-          \File::delete('public/image/'.$deleteimg);
-          $post->delete();
-         }
-         return redirect('/');
+        $post->delete();
+        $id = $post->user_id;
+        return redirect()->route('mypage',$id);
     }
 
 
-    public function search(Request $request){
-        // dd($request->search);
+    public function search(Request $request, User $user){
         $search = $request->search;
-        $posts = Post::select('id','title','image')->where('title','like',"%{$search}%")->orWhere('body','like',"%{$search}%")->paginate(3);
+        $posts = Post::orwhere('restaurant_name','like',"%{$search}%")->orWhere('restaurant_intro_short','like',"%{$search}%")->orWhere('restaurant_intro_long','like',"%{$search}%")->orWhere('restaurant_image','like',"%{$search}%")->orWhere('restaurant_address','like',"%{$search}%")->orWhere('restaurant_access_line_station','like',"%{$search}%")->orWhere('restaurant_access_line_station_walk','like',"%{$search}%")->orWhere('restaurant_tell','like',"%{$search}%")->orWhere('restaurant_opentime_holiday','like',"%{$search}%")->orWhere('restaurant_budget','like',"%{$search}%")->orWhere('restaurant_credit_card','like',"%{$search}%")->orWhere('restaurant_e_money','like',"%{$search}%")->orWhere('restaurant_url','like',"%{$search}%")->where('user_id',$user->id)->paginate(10);
 
         $search_result = '「'.$search.'」'.'の検索結果'.$posts->total().'件';
 
-        return view('posts.index',compact('posts','search_result','search'));
+        return view('users.search_result',compact('posts','search_result','search'))->with('user', $user);
     }
 
 }

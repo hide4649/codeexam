@@ -6,9 +6,6 @@
 <link rel="stylesheet" href="{{ asset('/css/register.css') }}">
 @endsection
 
-@section('js')
-<script type="text/javascript" src="{{ asset('/js/preview.js') }}"></script>
-@endsection
 
 @section('content')
 
@@ -16,7 +13,7 @@
 <div class="container mt-4 mb-auto">
   <div class="row">
     <div class="col-sm text-left">
-      <h1>新規登録</h1>
+      <label class="newRegister">新規登録</label>
     </div>
     <div class="col-sm text-right">
     <a href="{{url('/')}}">

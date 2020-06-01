@@ -24,21 +24,15 @@ class CreatePostsTable extends Migration
             
             $table->text('restaurant_address')->nullable();
             
-            $table->text('access_line')->nullable();
+            $table->text('restaurant_access_line_station')->nullable();
             
-            $table->text('access_station')->nullable();
-            
-            $table->text('restaurant_access_walk')->nullable();
-            
+            $table->text('restaurant_access_line_station_walk')->nullable();
+
             $table->text('restaurant_tell')->nullable();
             
-            $table->text('restaurant_opentime')->nullable();
-            
-            $table->text('restaurant_holiday')->nullable();
+            $table->text('restaurant_opentime_holiday')->nullable();
             
             $table->text('restaurant_budget')->nullable();
-            
-            $table->text('restaurant_budget_lunch')->nullable();
             
             $table->text('restaurant_credit_card')->nullable();
             

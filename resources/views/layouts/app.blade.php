@@ -4,26 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  {{-- <link rel="stylesheet" href="{{ asset('/css/app.css') }}"> --}}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/b3157441e0.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Corben:700">
+  <link rel = 'stylesheet' type='text/css' href="{{ asset('/css/app.css') }}">
   @yield('css')
   <title>@yield('title')</title>
 </head>
 
 
 <body class="d-flex flex-column" style="min-height: 100vh">
-
-<!-- {{-- header section --}} -->
-    {{-- <header class="sticky-top bg-warning text-center">
-      <h3><i class="fas fa-utensils"></i>NOW FOOD<i class="fas fa-utensils"></i></h3>
-      <p>～現在地から「美味しい」が見つかる～</p>
-    </header> --}}
-  <!-- {{-- header section --}} -->
   <nav class="navbar navbar-expand-lg navbar-light bg-warning sticky-top">
-    <a href="{{ url('/')}}" class="navbar-brand"><h3><i class="fas fa-utensils"></i>NOW FOOD<i class="fas fa-utensils"></i></h3></a>
+    <a href="{{ url('/')}}" class="navbar-brand">
+      <img src="{{ asset('/img/NOW FOOD.png') }}">
+    </a>
     <button class="navbar-toggler"type="button" data-toggle="collapse" data-target="#home">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,7 +38,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="{{ route('mypage', Auth::user()->id) }}">お気に入り一覧</a>
-              <a class="dropdown-item" href="{{ route('editprofile',$user ?? '') }}">
+              <a class="dropdown-item" href="{{ route('userInfoEdit',Auth::user()->id) }}">
               ユーザー情報編集</a>
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">ログアウト</a>
@@ -61,9 +57,11 @@
           <li class="nav-item">
             <a data-target="#loginModal" data-toggle="modal" class="nav-link"><i class="fas fa-user"></i>ログイン</a>
           </li>
-
+          
+          
         @endauth
       </ul>
+      @yield('header')
     </div>
   </nav>
 
@@ -129,7 +127,7 @@
 
   <!-- {{-- main section --}} -->
    @yield('content')
-  
+   
 
 
 
