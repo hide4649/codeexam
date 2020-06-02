@@ -12,10 +12,10 @@
 @section('content')
 <div class="container mt-4 mb-auto">
   <div class="row">
-    <div class="col-sm text-left">
+    <div class="col text-left">
       <label class="newRegister">新規登録</label>
     </div>
-    <div class="col-sm text-right">
+    <div class="col text-right">
     <a href="{{url('/')}}">
       <button type="button" class="btn btn-outline-light border-dark text-dark">戻る</button>
     </a>

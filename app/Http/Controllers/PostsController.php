@@ -19,36 +19,41 @@ class PostsController extends Controller
     public function store(Request $request){
         $restaurant_name = $request->input('restaurant_name');
         $db = Post::select('restaurant_name')->where('restaurant_name',$restaurant_name)->get();
-      if(is_null($db)){
-        $post = new Post;
-        $post->user_id = Auth::id();
-        $post->restaurant_name = $request->restaurant_name; 
-        $post->restaurant_intro_short = $request->restaurant_intro_short; 
-        $post->restaurant_intro_long = $request->restaurant_intro_long; 
-        $post->restaurant_image = $request->restaurant_image; 
-        $post->restaurant_address = $request->restaurant_address; 
-        $post->restaurant_access_line_station = $request->restaurant_access_line_station; 
-        $post->restaurant_access_line_station_walk = $request->restaurant_access_line_station_walk;  
-        $post->restaurant_tell = $request->restaurant_tell; 
-        $post->restaurant_opentime_holiday = $request->restaurant_opentime_holiday; 
-        $post->restaurant_budget = $request->restaurant_budget;  
-        $post->restaurant_credit_card = $request->restaurant_credit_card; 
-        $post->restaurant_e_money = $request->restaurant_e_money; 
-        $post->restaurant_url = $request->restaurant_url;
-        
-        $post->save();
-        return response()->json(['message' => '保存完了しました']);
-      }else{
-        return response()->json(['message' => 'もうすでに保存しています']);
-      }
+        if(Auth::check()){
+          if(is_null($db)){
+            $post = new Post;
+            $post->user_id = Auth::id();
+            $post->restaurant_name = $request->restaurant_name; 
+            $post->restaurant_intro_short = $request->restaurant_intro_short; 
+            $post->restaurant_intro_long = $request->restaurant_intro_long; 
+            $post->restaurant_image = $request->restaurant_image; 
+            $post->restaurant_address = $request->restaurant_address; 
+            $post->restaurant_access_line_station = $request->restaurant_access_line_station; 
+            $post->restaurant_access_line_station_walk = $request->restaurant_access_line_station_walk;  
+            $post->restaurant_tell = $request->restaurant_tell; 
+            $post->restaurant_opentime_holiday = $request->restaurant_opentime_holiday; 
+            $post->restaurant_budget = $request->restaurant_budget;  
+            $post->restaurant_credit_card = $request->restaurant_credit_card; 
+            $post->restaurant_e_money = $request->restaurant_e_money; 
+            $post->restaurant_url = $request->restaurant_url;
+            
+            $post->save();
+            return response()->json(['success' => '保存完了しました']);
 
-
+          }else{
+            return response()->json(['alert' => 'もうすでに保存しています']);
+          }
+          
+        }else{
+          return response()->json(['alert' => 'ユーザーのみ保存できます']);
+        }
     }
 
 
     public function destroy(Post $post) {
         $post->delete();
         $id = $post->user_id;
+        \Session::flash('flash_message', '削除が完了しました！');
         return redirect()->route('mypage',$id);
     }
 

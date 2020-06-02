@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(1);
-        return view('posts.index')->with('posts',$posts);
+    
     }
 }

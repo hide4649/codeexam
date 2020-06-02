@@ -26,7 +26,7 @@
   
   
     <div class="row justify-content-center">
-      <div class="col-5 bg-light py-2 mt-4 text-center">
+      <div class="col-7 col-sm-5 bg-light pt-2 mt-4 text-center">
          @if (isset($search_result))
           <h4>{{ $search_result }}</h4>
          @else
@@ -34,11 +34,20 @@
          @endif 
       </div>
     </div>
+
+    @if(session('flash_message'))
+    <div class="row justify-content-center">
+      <div class="col-7 col-sm-5 pt-2 pb-0 mt-1 alert-success alert text-center">
+          <h4>{{ session('flash_message') }}</h4>    
+        </div>
+      </div>
+    </div>
+    @endif 
   
       
 
             @forelse ( $posts as $post )
-              <div class="container-fluid result mt-4">
+              <div class="container-fluid result mt-3">
                 <div class="row justify-content-center">
                   <div class="col-sm-10 col-xl-7">
                     <div class="card text-white bg-dark mb-5">

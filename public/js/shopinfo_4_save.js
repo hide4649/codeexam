@@ -58,8 +58,15 @@ new Vue({
               withCredentials: true
           })
           axiosPost.post(url, params).then(function(response){
-                $message = response.data["message"];
-                document.getElementById(`message_shopinfo_4`).textContent =$message;
+                $success = response.data["success"];
+                $alert = response.data["alert"];
+                if($success){
+                  document.getElementById(`message_suceess_shopinfo_4`).textContent = $suceess;
+                }else{
+                  if($alert){
+                    document.getElementById(`message_alert_shopinfo_4`).textContent = $alert;
+                  }
+                }
               })
               .catch(function(error){
                 

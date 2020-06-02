@@ -57,7 +57,7 @@
             <div class="col-12">
               <div class="row">
   
-                <div class="cp_ipselect cp_sl04 col">
+                <div class="cp_ipselect cp_sl04 col-11 col-sm-5">
                   <select id = range>
                     <option value='1'>300m</option>
                     <option value='2'>500m</option>
@@ -67,10 +67,8 @@
                   </select>
                 </div>
     
-                <div class="input-group col">
-                  <input type="text" id = 'result' disabled="disabled" value="" class="form-control" placeholder="現在地取得">
-                  <input type="hidden" id = 'latitude' value="" class="form-control">
-                  <input type="hidden" id = 'longitude' value="" class="form-control">
+                <div class="input-group col-12 col-sm-6">
+                  <input type="text" id="result" disabled="disabled" value="" class="form-control" placeholder="現在地取得">
                   <span class="input-group-btn">
                     <button type="button" class="btn btn-primary"onclick="getyorpositon();"><i class="fas fa-location-arrow"></i></button>
                   </span>
@@ -79,17 +77,26 @@
               </div>
             </div>
   
-            <div class="input-group text-center col">
-              <input type="text" id = 'freeword' class="form-control" placeholder="フリーワード検索" value="">
+            <div class="input-group text-center col-12 col-sm-11 padding">
+              <input type="text" id="freeword" class="form-control" placeholder="フリーワード検索" value="">
               <span class="input-group-btn">
-                <button type="button" class="btn btn-primary"onclick="gnaviFreewordSearch(offset=1, hit_per_page=20);"><i class="fas fa-search-plus"></i></button>
+                <button type="button" class="btn btn-primary" onclick="gnaviFreewordSearch(offset=1, hit_per_page=20);"><i class="fas fa-search-plus"></i></button>
               </span>
             </div>
+
+            <div id="location_error" class="alert alert-danger text-center col-12 col-sm-11 padding d-none">
+              <h6 id="location_error_message"></h6>
+            </div>
+
+            <div id="research_error" class="alert alert-danger text-center col-12 col-sm-11 padding d-none">
+              <h6 id="research_error_message"></h6>
+            </div>
+
           </div>
         </form>
       </div>
      </div>
-  
+      
   
      <div class="container-fluid result">
         <div class="row justify-content-center" id = 'shopinfo'>
@@ -130,7 +137,5 @@
     <footer class="footer text-center bg-warning fixed-bottom mt-5">
       <p>Supported by <a href="https://api.gnavi.co.jp/api/scope/" target="_blank"><img class="footer-logo my-1" src="{{ asset('/img/ぐるなび.jpg') }}" alt=""></a></p>
     </footer>
-  
-  
   
 @endsection

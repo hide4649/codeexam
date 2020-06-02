@@ -6,6 +6,11 @@
 <link rel = 'stylesheet' type='text/css' href="{{ asset('/css/search_result.css') }}">
 @endsection
 
+@section('js')
+<script src="{{ asset('/js/deleteConfirm.js') }}"></script>
+@endsection
+
+
 
 @section('header')
   <form method="post" action="{{ route('search',$user)}}"class="form-inline my-2">
@@ -22,7 +27,7 @@
   
   
     <div class="row justify-content-center">
-      <div class="col-5 bg-light py-2 mt-4 text-center">
+      <div class="col-7 col-sm-5 bg-light pt-2 mt-4 text-center">
         <h4>{{ $search_result }}</h4>
       </div>
     </div>
@@ -49,6 +54,13 @@
                             <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal_{{ $post->id }}">
                               店舗情報はこちら
                             </button>
+                            <button type="button" class="btn btn-primary mt-2">
+                              <a class="del" data-id ="{{ $post->id }}">削除する</a>
+                            </button>
+                            <form method="post" action="{{ route('delete', [$post->id , Auth::id()]) }}" id="form_{{ $post->id }}">
+                              {{ csrf_field() }}
+                              {{ method_field('delete') }}
+                            </form>
                           </div>
                         </div>
                       </div>

@@ -34,7 +34,7 @@ i{
 
 
 .navbar-brand img{
-  height: 50px !important;
+  height: 50px ;
 }
 
 
@@ -72,10 +72,6 @@ i{
 }
 
 
-a{
-  cursor: pointer;
-}
-
 /* footer-section */
 .footer{
 	width: 100%;
@@ -93,14 +89,27 @@ a{
 
 a{
 	cursor: pointer;
-	text-decoration: none;
-	color: black;
+	color: white;
 }
 
-a:hover{
-	color: black;
+a:hover ,a:active{
+	color: royalblue;
 	text-decoration: underline;
+}
+
+.alert-danger, .alert-success{
+	margin:10px;
+}
+
+@media (max-width: 768px) {
+	.form-control{
+		width: 50%;
+  }
 	
+	nav >.btn{
+	 font-size: 14px;
+	 height: 100%;
+  }
 }
 
 @media (max-width: 540px) { 
@@ -125,4 +134,12 @@ a:hover{
 	.carousel-image{
 		height: 200px !important;
 	}
+	
+}
+
+@media (max-width: 330px) {
+	.navbar-brand img{
+		height: 40px ;
+	}
+	
 }

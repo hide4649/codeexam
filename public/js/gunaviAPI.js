@@ -1,22 +1,28 @@
+var latitude = '';
+var longitude= '';
+
 function getyorpositon(){
-  navigator.geolocation.getCurrentPosition(function(pos) {
-  // Geolocation APIのコールバック関数
-  // console.log(pos);
-  var lat = pos.coords.latitude;
-  var lng = pos.coords.longitude;
-  document.getElementById("latitude").value = lat;
-  document.getElementById("longitude").value = lng;
-  document.getElementById("result").value = "現在地が取得できました";
-}) 
+    navigator.geolocation.getCurrentPosition(function(pos) {
+
+    latitude = pos.coords.latitude;
+    longitude = pos.coords.longitude;
+    if(latitude && longitude){
+      document.getElementById("result").value = "現在地が取得できました";
+    }else{
+      document.getElementById("location_error").classList.remove('d-none');
+      document.getElementById("location_error_message").textContent = "位置情報の設定を確認してください";
+    }
+  });
 }
 
+
+
 function gnaviFreewordSearch(offset, hit_per_page){
-    // Geolocation APIのコールバック関数
-    // console.log(pos);
+    
     var req = new XMLHttpRequest();
     var keyid = "9520c6838a4f82f8cb7389cbbc1d7215";
-    var lat = document.forms.mainform.elements['latitude'].value
-    var lng = document.forms.mainform.elements['longitude'].value
+    var lat = latitude;
+    var lng = longitude;
     var freeword = document.forms.mainform.elements['freeword'].value
     var range = document.forms.mainform.elements['range'].value
     var url = `https://api.gnavi.co.jp/RestSearchAPI/v3/?keyid=${keyid}&latitude=${lat}&longitude=${lng}&range=${range}&freeword=${freeword}&offset=${offset}&hit_per_page=${hit_per_page}`;
@@ -26,18 +32,18 @@ function gnaviFreewordSearch(offset, hit_per_page){
     
     req.open('GET', url, true);
 
+    
     req.onload = function(){
       for(i = 0; i < hit_per_page; i++){
       //APIで取得した店の名前と画像を表示
       //それぞれをぐるなびのサイトにリンクしている
 
        var number = document.getElementById("shopinfo").childNodes[i].id;
-      //  var number = id.replace(/[^0-9]/g, '');
-      document.getElementById("shopinfo").childNodes[i].innerHTML 
-      = `<div class="card text-white bg-dark mb-5">
+       document.getElementById("shopinfo").childNodes[i].innerHTML 
+        = `<div class="card text-white bg-dark mb-5">
             <div class="row justify-content-center" id="favorite_${number}">
               <div class="col-5 pr-0">
-                <img class="card-img w-100 h-100" src="${req.response.rest[i].image_url.shop_image1}" onerror="this.src='{{ asset('/img/noimage.jpg') }}'; this.removeAttribute('onerror'); this.removeAttribute('onload');"
+                <img class="card-img w-100 h-100" src="${req.response.rest[i].image_url.shop_image1}" onerror="this.src='https://192.168.99.101/img/noimage.jpg'; this.removeAttribute('onerror'); this.removeAttribute('onload');"
                 onload="this.removeAttribute('onerror'); this.removeAttribute('onload');" alt="no image">
               </div>
               <div class="col-7 card-body-padding">
@@ -47,7 +53,10 @@ function gnaviFreewordSearch(offset, hit_per_page){
                   <div class="card-content border-success border-top border-bottom">
                   <p class="card-text" id="restaurant_intro_short_${number}">${req.response.rest[i].pr.pr_short }</p>
                   </div>
-                  <span id="message_${number}"></span>
+                  <div class="conteiner text-center mt-1">
+                   <span id="message_suceess_${number}" class="alert-suceess"></span>
+                   <span id="message_alert_${number}" class="alert-danger"></span>
+                  </div>
                   <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal_${number}">
                     店舗情報はこちら
                   </button>
@@ -69,7 +78,7 @@ function gnaviFreewordSearch(offset, hit_per_page){
                   </button>
                 </div>
                 <div class="modal-body border-success border-bottom">
-                <img id="restaurant_image_${number}" class="mb-2 w-100 h-100" src = ${req.response.rest[i].image_url.shop_image1} onerror="this.src='{{ asset('/img/noimage.jpg') }}'; this.removeAttribute('onerror'); this.removeAttribute('onload');">
+                <img id="restaurant_image_${number}" class="mb-2 w-100 h-100" src = "${req.response.rest[i].image_url.shop_image1}" onerror="this.src='https://192.168.99.101/img/noimage.jpg'; this.removeAttribute('onerror'); this.removeAttribute('onload');" onload="this.removeAttribute('onerror'); this.removeAttribute('onload');">
                 <p><店舗紹介></p>
                 <p id="restaurant_intro_long_${number}" class="border-success border-top border-bottom">${req.response.rest[i].pr.pr_long }</p>
                 <p><住所></p>
@@ -77,7 +86,7 @@ function gnaviFreewordSearch(offset, hit_per_page){
                 <p><アクセス></p>
                 <p class="border-success border-bottom" id="restaurant_access_line_station_walk_${number}">${req.response.rest[i].access.line} ${req.response.rest[i].access.station} ${req.response.rest[i].access.walk}分</p>
                 <p><電話番号></p>
-                <p class="border-success border-bottom" id="restaurant_tell_${number}">${req.response.rest[i].tel}</p>
+                <a href="tel:${req.response.rest[i].tel}"><p class="border-success border-bottom" id="restaurant_tell_${number}">${req.response.rest[i].tel}</p></a>
                 <p><営業時間></p>
                 <p class="border-success border-bottom" id="restaurant_opentime_holiday_${number}">${req.response.rest[i].opentime}  ⚠休業日 ${req.response.rest[i].holiday}</p>
                 <p><予算></p>
@@ -94,6 +103,7 @@ function gnaviFreewordSearch(offset, hit_per_page){
               </div>
             </div>
           </div>`;
+      
 
           if(i > 9){
             document.getElementById('next').innerHTML =`<nav aria-label="Page navigation example">
@@ -105,5 +115,9 @@ function gnaviFreewordSearch(offset, hit_per_page){
           }
         }
     };
+    req.onerror = function(e){
+      document.getElementById("research_error").classList.remove('d-none');
+      document.getElementById("research_error_message").textContent = "リロードしてからもう一度お試しください";
+    }
     req.send();
 }
