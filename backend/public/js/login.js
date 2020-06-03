@@ -19,7 +19,7 @@ new Vue({
               remember: this.remember,
           };
           axios.post(url, params).then(function(response){
-                 location.href = '/home';
+                 location.href = '/';
               })
               .catch(function(error){
                 if (error.response.status === 422) {

@@ -82,8 +82,9 @@ function gnaviFreewordSearch(offset, hit_per_page){
                 <p><店舗紹介></p>
                 <p id="restaurant_intro_long_${number}" class="border-success border-top border-bottom">${req.response.rest[i].pr.pr_long }</p>
                 <p><住所></p>
+                <a href="https://maps.google.co.jp/maps/search/${req.response.rest[i].address}" target="_blank">
                 <p class="border-success border-bottom" id="restaurant_address_${number}">${req.response.rest[i].address}</p>
-                <p><アクセス></p>
+                <p><アクセス></p></a>
                 <p class="border-success border-bottom" id="restaurant_access_line_station_walk_${number}">${req.response.rest[i].access.line} ${req.response.rest[i].access.station} ${req.response.rest[i].access.walk}分</p>
                 <p><電話番号></p>
                 <a href="tel:${req.response.rest[i].tel}"><p class="border-success border-bottom" id="restaurant_tell_${number}">${req.response.rest[i].tel}</p></a>
@@ -97,7 +98,7 @@ function gnaviFreewordSearch(offset, hit_per_page){
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                  <a href = ${req.response.rest[i].url} id="restaurant_url_${number}">
+                  <a href = ${req.response.rest[i].url} target="_blank" id="restaurant_url_${number}">
                   <button type="button" class="btn btn-primary">ご予約はこちらから</button></a>
                 </div>
               </div>
@@ -117,7 +118,7 @@ function gnaviFreewordSearch(offset, hit_per_page){
     };
     req.onerror = function(e){
       document.getElementById("research_error").classList.remove('d-none');
-      document.getElementById("research_error_message").textContent = "リロードしてからもう一度お試しください";
+      document.getElementById("research_error_message").textContent = "ページを読み込んでからもう一度お試しください";
     }
     req.send();
 }
